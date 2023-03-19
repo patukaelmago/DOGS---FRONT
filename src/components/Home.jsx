@@ -16,7 +16,7 @@ import { Link } from 'react-router-dom';
 import Card from './Card';
 import Paginado from "./Paginado";
 import SearchBar from "./SearchBar";
-import Loading from "./Loading";
+
 
 export default function Home() {
     const dispatch = useDispatch();
@@ -89,7 +89,7 @@ export default function Home() {
     
     return (
         <div>
-            {currentDogs.length > 0 ?
+            
             <div className="home">
                 <div className="papeiners">
                     <hr></hr>
@@ -176,7 +176,7 @@ export default function Home() {
                 paginado = {paginado}
                 currentPage={currentPage}/>}
             </div>
-        </div>: <Loading/>} 
+        </div>
         </div>
     )
 }
