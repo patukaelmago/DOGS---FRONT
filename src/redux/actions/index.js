@@ -16,12 +16,12 @@ export function getDogs(name) {
     return async function (dispatch) {
         try {
             if (name) {
-                const dogsName = await axios.get('https://dogs-back.onrender.com/dogs?name=' + name)
+                const dogsName = await axios.get('https://api.render.com/deploy/srv-cdqhac4gqg47to2f0r80?key=Y-BWhnPhpWY?name=' + name)
                 return dispatch ({ 
                     type: GET_DOGS_BY_NAME, 
                     payload: dogsName.data })
             }
-            const dogs = await axios.get('https://dogs-back.onrender.com/dogs');
+            const dogs = await axios.get('https://api.render.com/deploy/srv-cdqhac4gqg47to2f0r80?key=Y-BWhnPhpWY');
             return dispatch({
                 type: GET_DOGS,
                 payload: dogs.data
