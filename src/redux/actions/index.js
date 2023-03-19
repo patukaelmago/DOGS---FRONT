@@ -34,7 +34,7 @@ export function getDogs(name) {
 export function getTemperaments(){
     return async function (dispatch){
         try {
-            const temperaments = await axios.get('https://dogs-back.onrender.com/temperaments');
+            const temperaments = await axios.get('https://api.render.com/deploy/srv-cdqhac4gqg47to2f0r80?key=Y-BWhnPhpWY/temperaments');
             
             return dispatch({
                 type: GET_TEMPERAMENTS,
