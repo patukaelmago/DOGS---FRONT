@@ -16,12 +16,12 @@ export function getDogs(name) {
     return async function (dispatch) {
         try {
             if (name) {
-                const dogsName = await axios.get('https://api.render.com/deploy/srv-cdqhac4gqg47to2f0r80?key=Y-BWhnPhpWY?name=' + name)
+                const dogsName = await axios.get('https://api.render.com/deploy/srv-cdqhac4gqg47to2f0r80?key=Y-BWhnPhpWY/dogs?name=' + name)
                 return dispatch ({ 
                     type: GET_DOGS_BY_NAME, 
                     payload: dogsName.data })
             }
-            const dogs = await axios.get('https://api.render.com/deploy/srv-cdqhac4gqg47to2f0r80?key=Y-BWhnPhpWY');
+            const dogs = await axios.get('https://api.render.com/deploy/srv-cdqhac4gqg47to2f0r80?key=Y-BWhnPhpWY/dogs');
             return dispatch({
                 type: GET_DOGS,
                 payload: dogs.data
@@ -72,7 +72,7 @@ export function filterCreated(payload) {
 export function postDog(payload) {
     return async function (dispatch) {
         try {
-            const response = await axios.post('https://dogs-back.onrender.com/dogs', payload);
+            const response = await axios.post('https://api.render.com/deploy/srv-cdqhac4gqg47to2f0r80?key=Y-BWhnPhpWY/dogs', payload);
         console.log(response);
         return dispatch({
             type: POST_DOGS,
@@ -86,7 +86,7 @@ export function postDog(payload) {
 export function getDetail(id) {
     return async function (dispatch) {
         try {
-            var json = await axios.get(`https://dogs-back.onrender.com/dogs/${id}`)
+            var json = await axios.get(`https://api.render.com/deploy/srv-cdqhac4gqg47to2f0r80?key=Y-BWhnPhpWY/dogs/${id}`)
             return dispatch({
                 type: GET_DETAIL,
                 payload: json.data,
