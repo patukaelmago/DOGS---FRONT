@@ -73,7 +73,7 @@ export function postDog(payload) {
     return async function (dispatch) {
         try {
             const response = await axios.post('https://dogs-back.onrender.com/dogs', payload);
-        console.log(response);
+        
         return dispatch({
             type: POST_DOGS,
             payload: response

@@ -46,7 +46,7 @@ function rootReducer (state = initialState, action){
         }
         case FILTER_CREATED:
             const dogFilter = state.allDogs
-console.log(dogFilter,action.payload)
+
             let dogFound = []
              if(action.payload === "Api Dogs"){
                 const dogApi = dogFilter?.filter(dog => dog.createdInDb === false )
@@ -84,7 +84,7 @@ console.log(dogFilter,action.payload)
                     }
                     return 0;
                 })
-                console.log(sortedName)
+               
             return {
                 ...state,
                     dogs: sortedName
