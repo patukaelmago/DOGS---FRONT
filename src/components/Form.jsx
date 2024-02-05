@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
+// import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {  getTemperaments, postDog, clearDogs} from "../redux/actions";
 import '../styles/Form.css';
 
@@ -39,7 +40,7 @@ const validate = (input)=>{
 
 export default function Form(){
     const dispatch = useDispatch();
-    const history = useHistory();
+    // const history = useHistory();
     const temperaments = useSelector((state) => state.temperaments);
     const [errors, setErrors] = useState({});
     /* const [clean,setClean] = useState(""); */
