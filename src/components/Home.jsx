@@ -1,5 +1,5 @@
 import React from "react";
-import '../styles/Home.css';
+// import '../styles/Home.css';
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 // import dog from "../images/dog.jpg";
