@@ -6,7 +6,7 @@ export default function LandingPage(){
     return (
         <div className='landingContainer'>
             <Link to='/home'>
-            <button className='landingButton'><h1><span> Welcome to Dogs </span></h1></button>
+            <button className='landingButton'><h1 ><span> Welcome to Dogs </span></h1></button>
             </Link>
         </div>
     )
