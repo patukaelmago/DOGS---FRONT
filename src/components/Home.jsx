@@ -2,7 +2,7 @@ import React from "react";
 import '../styles/Home.css';
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import dog from "../images/dog.jpg";
+// import dog from "../images/dog.jpg";
 import { 
     getDogs, 
     getTemperaments, 
@@ -95,7 +95,7 @@ export default function Home() {
                     <hr></hr>
                 </div>   
                 <div className="header">
-                    <img src={dog} alt="img not found" />
+                    {/* <img src={dog} alt="img not found" /> */}
                     <p><strong>Dogs</strong></p>
                     <h3>Unconditional Love</h3>
                     <div className="padr">
