@@ -92,10 +92,10 @@ export default function Home() {
             
             <div className="home">
                 <div className="papeiners">
-                    <hr></hr>
+                
                 </div>   
                 <div className="header">
-                    {/* <img src={dog} alt="img not found" /> */}
+                
                     <p><strong>Dogs</strong></p>
                     <h3>Unconditional Love</h3>
                     <div className="padr">
