@@ -1,8 +1,9 @@
 import React from "react";
-// import '../styles/Home.css';
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-// import dog from "../images/dog.jpg";
+import Loading from "./Loading";
+import Footer from './Footer';
+
 import { 
     getDogs, 
     getTemperaments, 
@@ -21,6 +22,7 @@ import SearchBar from "./SearchBar";
 export default function Home() {
     const dispatch = useDispatch();
     const allDogs = useSelector((state) => state.dogs);
+   
     const allTemperaments = useSelector((state) => state.temperaments);
     const [currentPage, setCurrentPage] = useState(1); 
     const [dogsPerPage, setDogsPerPage] = useState(8); 
@@ -88,64 +90,60 @@ export default function Home() {
     }
     
     return (
-        <div>
-            
-            <div className="home">
-                <div className="papeiners">
-                
-                </div>   
-                <div className="header">
-                
-                    <p><strong>Dogs</strong></p>
-                    <h3>Unconditional Love</h3>
-                    <div className="padr">
-                        <Link to='/dogs'>
-                            <button className='elementNA' value="dog"> 
-                                Create Dog
-                            </button>
-                        </Link>
-                    </div>
-                    <div className="padl">
-                        <button className='elementNA' onClick={e => { handleClick(e) }} >
-                           All Dogs
-                        </button>
-                    </div>
-                    
-                        <div className="pad">
+        <>
+        <div className=" mx-auto">
+        { 
+            allDogs.length?
+            <>
+                <div className="container mx-auto max-w-md">
+                    <h1 className="text-6xl font-extrabold pt-4 mb-3"><strong>Dogs</strong></h1>
+                    <h3 className="text-lg font-extrabold pb-4">Unconditional Love</h3>
+                    <div className="rounded-xl border mx-4 py-1 font-bold text-xl mb-4">
                             <SearchBar 
                             setCurrentPage={setCurrentPage} />
                         </div>
-                    
-                    <div className="padw">
-                        <select  className='elementNC'defaultValue='selected' onChange={e => handleSortByName(e)} >
+                    <div  className="rounded-xl border mx-4 py-1 font-bold text-xl mb-4">
+                        <Link to='/dogs'>
+                            <button value="dog"> 
+                               <h3>Create Dog</h3> 
+                            </button>
+                        </Link>
+                    </div>
+                    <div className="rounded-xl border mx-4 py-1 font-bold text-xl mb-4">
+                        <button className='elementNA' onClick={e => { handleClick(e) }} >
+                           <h3 >All Dogs</h3>
+                        </button>
+                    </div>
+                    <div className="rounded-xl border mx-4 py-1 font-bold text-xl mb-4">
+                        <select  className='bg-teal-500'defaultValue='selected' onChange={e => handleSortByName(e)} >
                             <option hidden value="Sort by name">{clean.name || "Sort by name"}</option>
-                            <option value='selected' disabled selected>Breed</option>
+                            <option value='selected' disabled >Breed</option>
                             <option value='Ascendent'>A - Z</option>
                             <option value='Descendent'>Z - A</option>
                         </select>
                     </div>
-                    <div className="padq">
-                        <select className="elementNC" defaultValue='selected' onChange={e => handleSortByWeight(e)}  >
+                    <div className="rounded-xl border mx-4 py-1 font-bold text-xl mb-4">
+                        <select className="bg-teal-500" defaultValue='selected' onChange={e => handleSortByWeight(e)}  >
                             <option hidden value="Sort by weight">{clean.weight || "Sort by weight"}</option>
-                            <option value='selected' disabled selected>Weight</option>
+                            <option value='selected' disabled >Weight</option>
                             <option value='Lighter to heavier'>Lighter to heavier</option>
                             <option value='Heavier to lighter'>Heavier to lighter</option>
                         </select>
                     </div>
-                    <div className="pade">
-                        <select className='elementNC' defaultValue='selected' onChange={e => handleFilterCreated(e)}>
+                    <div className="rounded-xl border mx-4 py-1 font-bold text-xl mb-4">
+                        <select className='bg-teal-500' defaultValue='selected' onChange={e => handleFilterCreated(e)}>
                             <option hidden value="Filter by Origin">{clean.created || "Filter by Origin"}</option>
-                            <option value="selected" disabled selected >Origin</option>
+                            <option value="selected" disabled >Origin</option>
                             <option value="Api Dogs">API</option>
                             <option value="In Database">DB</option>
                         </select>
                     </div>
-                    <div className="padf">
-                        <select className='elementNC' defaultValue='selected' name='temperaments' onChange={e => handleFilterTemperaments(e)} >
+                    <div className="rounded-xl border mx-4 py-1 font-bold text-xl mb-4">
+                        <select className='bg-teal-500' defaultValue='selected' name='temperaments' onChange={e => handleFilterTemperaments(e)} >
                             <option hidden value="Filter Temperaments">
                                 {clean.temperaments || "Filter Temperaments"}
                             </option>
-                            <option value='selected' disabled selected>Temperaments</option>
+                            <option value='selected' disabled >Temperaments</option>
                             <option value='all'>All</option>
                             {allTemperaments.map(t => (
                             <option key={t.id} value={t.name}>{t.name}</option>
@@ -153,7 +151,7 @@ export default function Home() {
                         </select>
                     </div>
                 </div>
-                <div className='cardsContainer'>
+                <div className='container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-4 '>
                     {currentDogs?.map(d => {
                     return (
                         <Card 
@@ -166,17 +164,22 @@ export default function Home() {
                         weightMax={d.weightMax}
                         heightMin={d.heightMin}
                         heightMax={d.heightMax}
+                        className="h-[200px]"
                          />
                     )})}
                 </div>
-            <div >
-            {<Paginado 
-                dogsPerPage={dogsPerPage}
-                allDogs={allDogs.length}
-                paginado = {paginado}
-                currentPage={currentPage}/>}
-            </div>
+                <div >
+                    {<Paginado 
+                    dogsPerPage={dogsPerPage}
+                    allDogs={allDogs.length}
+                    paginado = {paginado}
+                    currentPage={currentPage}/>}
+                </div>
+            </>
+            : <Loading/>
+        }
         </div>
-        </div>
+        <Footer />
+        </>
     )
 }
