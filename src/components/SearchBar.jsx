@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { getDogs } from '../redux/actions';
-import '../styles/SearchBar.css';
+
 import { FaSearch } from 'react-icons/fa';
 
 function SearchBar({setCurrentPage}) {
@@ -20,12 +20,12 @@ function SearchBar({setCurrentPage}) {
     return (
         <> 
             <input
-                className='input'
+                className='bg-teal-500 placeholder-black text-center'
                 type='search'
-                placeholder=' Search Dog ...'
+                placeholder=' Search Dog'
                 onChange={ handleInputChange }
                 value={name}
-            /> <button className='searcho' type='search' onClick={handleSubmit}><FaSearch/></button>
+            /> <button className='' type='search' onClick={handleSubmit}><FaSearch/></button>
         </>
     )
 }
