@@ -1,5 +1,4 @@
 import React from 'react';
-import styles from '../styles/Paginado.css'
 
 export default function Paginado({dogsPerPage, currentPage, allDogs, paginado}){
     const pageNumbers = []
@@ -8,27 +7,28 @@ export default function Paginado({dogsPerPage, currentPage, allDogs, paginado}){
     }
 
     return(
-        <nav>
-          <div className='flechas-container'>
+        <nav className=''>
+          <div className=''>
+            <div className=''>
             {
-              currentPage > 1 ? <button className='flechas' onClick={()=>paginado(currentPage - 1)}> ❮ </button>:
-              <button className='flechas' disabled> ❮ </button>
+              currentPage > 1 ? <button  onClick={()=>paginado(currentPage - 1)}> <h1 className='text-2xl p-2 mx-2 text-extrabold '>❮</h1> </button>:
+              <button disabled><h1 className='text-2xl p-2 text-extrabold mx-2'>❮</h1>  </button>
             }
              {
-              currentPage < pageNumbers.length ? <button className='flechas' onClick={()=>paginado(currentPage + 1)}> ❯ </button>:
-              <button className='flechas' disabled> ❯ </button>
+              currentPage < pageNumbers.length ? <button className='flechas' onClick={()=>paginado(currentPage + 1)}><h1 className='text-2xl p-2 text-extrabold mx-2'>❯</h1> </button>:
+              <button  disabled><h1 className='text-2xl p-2 text-extrabold mx-2'>❯</h1>  </button>
             }
+            </div>
           </div>
-            <div className='paginado'>
+          <div className='paginado'>
         {
           pageNumbers?.map(num=>(
             <span key={num}>
-              <button className='number' onClick={()=>paginado(num)} ><strong>{num}</strong></button>
+              <button className='p-2 text-xl font-bold' onClick={()=>paginado(num)} ><strong>{num}</strong></button>
             </span>
           ))
         }
-           </div>
-    </nav>
+          </div>
+        </nav>
       )
     }
-        
