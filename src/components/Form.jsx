@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { Link, useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import {  getTemperaments, postDog, clearDogs} from "../redux/actions";
-import '../styles/Form.css';
+import Footer from './Footer';
+
 
 function validURL(strurl){
     let validate = new RegExp('^(https?:\\/\\/)?' + // protocol
@@ -20,19 +20,19 @@ const validate = (input)=>{
     if(input.name.length < 3 || input.name.length > 30) errors.name = 'Name must contain between 3 and 30 characters'
     if(!/^[a-zA-Z\s]+$/.test(input.name)) errors.name = 'Invalid name, must only contain letters'
     if(!input.temperaments) errors.temperaments = 'Chosse a temperament'
-    if(input.weightMin < 1   )errors.weightMin = 'Must be a positive number'
+    
     if(input.weightMin > 70 )errors.weightMin = 'Min value must be less than 70 kg'
     if(input.weightMin > input.weightMax)errors.weightMin = 'Min value must be less than Max value'
-    if(input.weightMax < 1 )errors.weightMax = 'Value must be a positive number'
+   
     if(input.weightMax > 100)errors.weightMax = 'Max value must be less than 100 kg'
     if(input.weightMax < input.weightMin)errors.weightMax = 'Max value must be higher than Min value'
-    if(input.heightMin < 1 )errors.heightMin = 'Value must be a positive number'
+   
     if(input.heightMin > 100)errors.heightMin='Min value must be less than 100 kg'
     if(input.heightMin > input.heightMax)errors.heightMin = 'Min value must be less than Max value'
-    if(input.heightMax < 1 )errors.heightMax = 'Value must be a positive number'
+    
     if(input.heightMax > 150)errors.heightMax='Max value must be less than 150 kg'
     if(input.heightMax < input.heightMin)errors.heightMax = 'Max value must be higher than Min value'
-    if(input.lifespan < '1') errors.lifespan = 'The age must be a positive number '
+   
     if(input.lifespan > '80')errors.lifespan = 'the value must be less than 80 years'
     if(!input.image || !validURL(input.image))errors.image = 'A valid image must be require'
     return errors
@@ -65,9 +65,7 @@ export default function Form(){
                 ...input,
                 temperaments:input.temperaments.includes(e.target.value) ? input.temperaments : [...input.temperaments, e.target.value]
             })
-
         }
-        
     }
 
     function handleChange(e){
@@ -87,7 +85,7 @@ export default function Form(){
         dispatch(postDog(input))
         dispatch(clearDogs())
         alert('Dog Created succesfully')
-        history.push('/home')
+        // history.push('/home')
     }
 
     function handleDelete(e){
@@ -101,17 +99,17 @@ export default function Form(){
     return (
         <>
         <div className="back-container-b">
-            <Link to= '/home'><button className="back">Back </button></Link>
+            <Link to= '/home'><button className="py-1 text-xl font-bold border rounded-xl px-3 mt-8">Back </button></Link>
         </div>
         <div className="form-container">
           <div className="created-card">
-            <h1>Create Dog</h1>
+            <h1 className=" mx-4 py-4 text-3xl font-extrabold mb-3">Create Dog</h1>
             <form onSubmit={handleSubmit}>
-                <div className="name-div">
-                    <label className="texto">Name</label>
+                <div className="rounded-xl border mx-4 py-1 font-bold text-xl mb-4">
+                    <label >Name: </label>
                     <input className="input-name"
                     type= 'text'
-                    placeholder='name...'
+                    placeholder=' Firulais'
                     value= {input.name}
                     name= 'name'
                     onChange={handleChange}
@@ -120,12 +118,12 @@ export default function Form(){
                         <p className="error-name">{errors.name}</p>
                     )}
                 </div>
-                <div className="image-div">
-                    <label className="texto">Image</label>
+                <div className="rounded-xl border mx-4 py-1 font-bold text-xl mb-4">
+                    <label className="texto">Image: </label>
                     <input
                     className="input-name"
                     type= 'text'
-                    placeholder="url..."
+                    placeholder=" url..."
                     value= {input.image}
                     name= 'image'
                     onChange={handleChange}
@@ -134,15 +132,15 @@ export default function Form(){
                         <p className="error-img">{errors.image}</p>
                     )}
                 </div >
-                <div className="label">
-                    <label className="texto">Height Min </label>
+                <div className="rounded-xl border mx-4 py-1 font-bold text-xl mb-4">
+                    <label className="texto">Height Min: </label>
                     <input
-                    className="input-form"
+                    className="pl-2"
                     type= 'number'
                     value= {input.heightMin}
                     name= 'heightMin'
                     min='1'
-                    max='70'
+                    max='100'
                     step={1}
                     onChange={(e)=>handleChange(e)}
                     />
@@ -150,10 +148,10 @@ export default function Form(){
                         <p className="error">{errors.heightMin}</p>
                     )}
                 </div>
-                <div className="label">
-                    <label className="texto">Height Max </label>
+                <div className="rounded-xl border mx-4 py-1 font-bold text-xl mb-4">
+                    <label className="">Height Max: </label>
                     <input
-                    className="input-form"
+                    className="pl-2"
                     type= 'number'
                     value= {input.heightMax}
                     name= 'heightMax'
@@ -166,47 +164,55 @@ export default function Form(){
                         <p className="error">{errors.heightMax}</p>
                     )}
                 </div>
-                <div className="label">
-                    <label className="texto">Weight Min </label>
+                <div className="rounded-xl border mx-4 py-1 font-bold text-xl mb-4">
+                    <label className="texto">Weight Min: </label>
                     <input
-                    className="input-form"
+                    className="pl-2"
                     type= 'number'
                     value= {input.weightMin}
                     name= 'weightMin'
+                    min='1'
+                    max='100'
+                    step={1}
                     onChange={handleChange}
                     />
                     {errors.weightMin && (
                         <p className="error-wm">{errors.weightMin}</p>
                     )}
                 </div>
-                <div className="label">
-                    <label className="texto">Weight Max </label>
+                <div className="rounded-xl border mx-4 py-1 font-bold text-xl mb-4">
+                    <label className="texto">Weight Max: </label>
                     <input
-                    className="input-form"
+                    className="pl-2"
                     type= 'number'
                     value= {input.weightMax}
                     name= 'weightMax'
+                    min='1'
+                    max='100'
+                    step={1}
                     onChange={handleChange}
                     />
                     {errors.weightMax && (
                         <p className="error">{errors.weightMax}</p>
                     )}
                 </div>
-                <div className="label">
-                    <label className="lifeSpan">Life Span </label>
+                <div className="rounded-xl border mx-4 py-1 font-bold text-xl mb-4">
+                    <label className="pr-7">Life Span: </label>
                     <input
-                    className="input-form"
+                    className="pl-2"
                     type= 'number'
                     value= {input.lifespan}
                     name= 'lifespan'
+                    min='1'
+                    max='100'
+                    step={1}
                     onChange={handleChange}
                     />
                     {errors.lifespan && (
                         <p className="error-ls">{errors.lifespan}</p>
                     )}
                 </div>
-                <div className="temps-div">
-                    <select className="select-form" onChange={handleSelectTemperaments} >
+                <div className="rounded-xl border mx-4 py-1 font-bold text-xl mb-4">Rasgos: <select className="select-form" onChange={handleSelectTemperaments} >
                         {temperaments?.map((t)=>(<option value={t.name}>{t.name}</option>)
                         )}
                     </select>
@@ -223,11 +229,12 @@ export default function Form(){
                     </ul>
                 </div>
                 <div className="submit-form">
-                    {input.name.length < 2 || Object.keys(errors).length > 0 ? <button className="disable-button" disabled>Submit</button> : <button className="submit-button" type='submit'>Submit</button>}
+                    {input.name.length < 2 || Object.keys(errors).length > 0 ? <button className="text-xl px-3 mt-2 border rounded-xl font-bold py-1" disabled>Submit</button> : <button className="py-1 text-xl px-3 mt-2 border rounded-xl font-bold" type='submit'>Submit</button>}
                 </div>
             </form>
           </div>
         </div>
+        <Footer />
     </>
   )
 }
