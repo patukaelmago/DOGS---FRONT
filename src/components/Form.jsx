@@ -98,7 +98,8 @@ export default function Form(){
 
     return (
         <>
-        <div className="back-container-b">
+        <div className="h-screen container mx-auto max-w-md">
+        <div className="">
             <Link to= '/home'><button className="py-1 text-xl font-bold border rounded-xl px-3 mt-8">Back </button></Link>
         </div>
         <div className="form-container">
@@ -235,6 +236,7 @@ export default function Form(){
           </div>
         </div>
         <Footer />
-    </>
+        </div>
+        </>
   )
 }
